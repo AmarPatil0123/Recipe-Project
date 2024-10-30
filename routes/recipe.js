@@ -109,7 +109,7 @@ router.post("/search",wrapAsync(async(req,res)=>{
 
 //show route
 
-router.get("/show/:id", wrapAsync(async (req, res, next) => {
+router.get("/show/:id", isUserLoggedIn,wrapAsync(async (req, res, next) => {
 
     let { id } = req.params;
 
