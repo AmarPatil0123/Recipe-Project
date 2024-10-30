@@ -1,0 +1,43 @@
+<% layout('/layouts/boilerplate') -%>
+
+<div class="edit-profile-container">
+    <form action="/updateProfile/<%=userData._id %>?_method=PUT" method="POST" enctype="multipart/form-data" class="edit-profile-form">
+        
+        <!-- Profile Picture -->
+        <div class="edit-profile-picture">
+            <label for="edit-profile-picture">
+                <img src="<%= userData.profile_image.url%>" alt="Profile Picture" class="edit-profile-img">
+            </label>
+            <input type="file" id="edit-profile-picture" name="user[profile_image]" accept="image/*" >
+        </div>
+
+        <!-- User Information -->
+        <div class="edit-user-info">
+            <!-- User Name -->
+            <div class="edit-user-name-section">
+                <input type="text" name="user[fullname]" class="edit-user-name-input" value="<%= userData.fullname %>" placeholder="Your Name" required>
+            </div>         
+
+            <!-- Bio -->
+            <textarea name="user[bio]" maxlength="400" class="edit-user-bio-input" placeholder="Write something about yourself..."><%= userData.bio %></textarea>
+            
+
+            <!-- Social Media Links -->
+            <div class="edit-social-icons">
+                <label for="edit-facebook">Facebook URL:</label>
+                <input type="url" id="edit-facebook" name="user[facebook]" class="edit-social-input" value="<%= userData.facebook %>" placeholder="https://www.facebook.com/yourprofile">
+
+                <label for="edit-instagram">Instagram URL:</label>
+                <input type="url" id="edit-instagram" name="user[instagram]" class="edit-social-input" value="<%= userData.instagram %>" placeholder="https://www.instagram.com/yourprofile">
+
+                <label for="edit-twitter">Twitter URL:</label>
+                <input type="url" id="edit-twitter" name="user[twitter]" class="edit-social-input" value="<%= userData.twitter %>" placeholder="https://www.twitter.com/yourprofile">
+            </div>
+
+            <!-- Save Button -->
+            <button type="submit" class="edit-save-profile-btn btn btn-success">Save Changes</button>
+        </div>
+    </form>
+</div>
+
+

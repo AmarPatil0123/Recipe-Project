@@ -1,0 +1,15 @@
+<% layout('/layouts/boilerplate') -%>
+
+<div class="container mt-5 d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="card shadow-lg p-4" style="border-radius: 15px; max-width: 800px; width: 100%;">
+    <div class="text-center mb-3">
+      <i class="fa-solid fa-triangle-exclamation text-warning" style="font-size: 3rem;"></i>
+    </div>
+    <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+      <strong><%= message %></strong>
+    </div>
+    <div class="text-center mt-4">
+      <a href="/recipes" class="btn btn-primary btn-lg" style="border-radius: 50px;">Go to Home</a>
+    </div>
+  </div>
+</div>

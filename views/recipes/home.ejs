@@ -1,0 +1,71 @@
+<% layout('/layouts/boilerplate') -%>
+
+  <%- include("../includes/heroSection.ejs") %>
+
+    <%- include("../includes/categorySection.ejs") %>
+
+      <h1 style="margin:5rem 0rem 1rem 0rem" id="recipes">Trending Recipes</h1>
+      <div class="recipe-container">
+        <% for(recipe of recipes){ %>
+          <div class="card-container" style="position: relative;">
+              <div class="img-container">
+                <a href="/recipes/show/<%= recipe._id %>">
+                <img src="<%= recipe.image.url %>" alt="image" />
+                </a>
+                <i class="fa-solid fa-heart fav" data-id="<%= recipe._id %>"
+                  style="cursor: pointer; color: rgba(29, 27, 27, 0.2); position: absolute; right: 1rem; top: 1rem;" title="Add to favourate">
+                </i>
+              </div>
+            <div class="text-container" style="width: 90%;">
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <p class="recipe-title">
+                  <%= recipe.title %>
+                </p>
+                <span style="font-size: .7rem;"><i class="fa-solid fa-eye"></i> <%= recipe.views %></span>
+              </div>
+              <p class="recipe-desc"><span>Desc :</span>
+                <%= recipe.description %>
+              </p>
+            </div>
+          </div>
+
+        <% } %>
+      </div>
+
+      <!-- recomendation recipes -->
+    <%if(user && recommendedRecipes.length>=1){%>
+      <h1 style="margin:4rem 0rem 1rem 0rem" id="recipes">Recommended for you </h1>
+      <div class="recipe-container">
+        <% for(recipe of recommendedRecipes){ %>
+          <div class="card-container">
+            <a href="/recipes/show/<%= recipe._id %>">
+              <div class="img-container">
+                <img src="<%= recipe.image.url %>" loading="lazy" alt="image" />
+              </div>
+            </a>
+            <div class="text-container" style="width: 90%;">
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <p class="recipe-title">
+                  <%= recipe.title %>
+                </p>
+                <span style="font-size: .7rem;"><i class="fa-solid fa-eye"></i> <%= recipe.views %></span>
+                <i class="fa-solid fa-heart fav" data-id="<%= recipe._id %>"
+                  style="cursor: pointer; color: rgba(29, 27, 27, 0.2);" title="Add to favourate">
+                </i>
+              </div>
+              <p class="recipe-desc"><span>Desc :</span>
+                <%= recipe.description %>
+              </p>
+            </div>
+          </div>
+
+        <% } %>
+      </div>
+    <%}%>
+      <a href="/recipes/new">Create new Recipe</a>
+
+<script>
+    if (window.history.replaceState && window.location.pathname === '/login') {
+        window.history.replaceState(null, null, '/recipes');
+    }
+</script>

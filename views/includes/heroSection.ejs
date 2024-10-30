@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Hero Section</title>
+  <style>
+    .hero-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #fff;
+      padding: 20px;
+      margin-top: -2rem !important;
+      flex-wrap: wrap;
+      /* Allows items to wrap on smaller screens */
+    }
+
+    .hero-text {
+      flex: 1;
+      max-width: 50%;
+      padding-right: 30px;
+    }
+
+    .hero-text h1 {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .hero-text p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      color: #666;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      padding: 15px 30px;
+      background-color: #ff6347;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      border-radius: 5px;
+    }
+
+    .hero-btn:hover {
+      text-decoration: none;
+      color: white;
+      text-shadow: 3px 3px 2px black;
+    }
+
+    .hero-image {
+      flex: 1;
+      max-width: 50%;
+    }
+
+    .hero-image img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+
+    /* Media queries for responsiveness */
+    @media (max-width: 1024px) {
+      .hero-text h1 {
+        font-size: 36px;
+      }
+
+      .hero-text p {
+        font-size: 16px;
+      }
+
+      .hero-btn {
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 845px) {
+      .hero-text h1 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 10px;
+      }
+
+      .hero-text,
+      .hero-image {
+        max-width: 65%;
+        /* Adjusts size for tablets */
+        padding: 10px;
+      }
+
+      .hero-text {
+        padding-right: 15px;
+      }
+
+      .hero-text h1 {
+        font-size: 20px;
+      }
+
+      .hero-text p {
+        font-size: 14px;
+      }
+
+      .hero-btn {
+        font-size: 14px;
+        padding: 8px 16px;
+      }
+    }
+
+    @media (max-width: 592px) {
+      .hero-section {
+        padding: 0px;
+      }
+
+      .hero-image {
+        max-width: 75% !important;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .hero-section {
+        flex-direction: row;
+        padding: 0px !important;
+
+
+        .hero-text h1 {
+          font-size: 1rem;
+        }
+      }
+
+      .hero-text,
+      .hero-image {
+        max-width: 75%;
+        padding: 5px;
+      }
+
+      .hero-text {
+        padding-right: 5px;
+      }
+
+      .hero-text p {
+        font-size: 12px;
+      }
+
+      .hero-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hero-section">
+    <div class="hero-text">
+      <h1 style="font-family: pacifico !important;">Delicious Recipes for Every Taste</h1>
+      <p>Explore a wide range of recipes curated just for food lovers like you. From quick bites to gourmet dishes, we
+        have something for every palate.</p>
+      <a href="/recipes" class="hero-btn">Explore Recipes</a>
+    </div>
+    <div class="hero-image">
+      <img src="/Images/heroImage.png" loading="lazy" alt="Delicious food image">
+    </div>
+  </div>
+</body>
+
+</html>

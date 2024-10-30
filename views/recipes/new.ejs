@@ -1,0 +1,151 @@
+<% layout('/layouts/boilerplate') -%>
+
+    <style>
+
+        .border{
+            border: 1px solid black !important;
+        }
+
+        @media (max-width :768px) {
+            .form-container{
+                width: 100% !important;
+            }
+        }
+    </style>
+
+    <body>
+        <form method="post" action="/recipes/newData" class="needs-validation form-container" 
+            style="margin: 0 auto; box-shadow: 0 0 10px 5px rgba(51, 51, 51, 0.073); width: 80%; padding: 2rem !important;" novalidate enctype="multipart/form-data">
+            <h1 class="text-center mb-4">Create New Recipe</h1>
+
+            <div class="row mb-4 mt-5">
+                <div class="col-6 col-sm-6" >
+                    <label for="title" class="form-label ">Enter Title  &nbsp;<i class="fa-solid fa-star-of-life star" ></i></label>
+                    <input type="text" placeholder="Enter title name" id="title" class="form-control border p-3" minlength="2" maxlength="20"
+                     name="recipe[title]" maxlength="20" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="col-6 col-sm-6">
+                    <label class="form-label">Choose Category &nbsp;<i class="fa-solid fa-star-of-life star" ></i></label>
+                    <select name="recipe[category]" class="form-select border p-3" aria-label="Default select example" required style="width: 100%; height: auto;">
+                        <option selected disabled>Choose Category</option>
+                        <option value="Nonveg">Nonveg</option>
+                        <option value="Mexican">Mexican</option>
+                        <option value="Low-Carb">Low-Carb</option>
+                        <option value="Gluten-Free">Gluten-Free</option>
+                        <option value="Salads">Salads</option>
+                        <option value="Vegetarian">Vegetarian</option>
+                        <option value="Desserts">Desserts</option>
+                        <option value="Soup">Soup</option>
+                        <option value="Pasta">Pasta</option>
+                        <option value="Snacks">Snacks</option>
+                    </select>
+                </div>
+                
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label for="description" class="form-label">Write Overview &nbsp;<i class="fa-solid fa-star-of-life star" ></i> </label>
+                    <textarea placeholder="Have a catchy Overview..." class="form-control border row-0 col-12" id="description" minlength="20"
+                        maxlength="200" name="recipe[description]" required></textarea>
+                    <div class="invalid-feedback">
+                        Add small Description
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <label class="form-label">Upload Image &nbsp;<i class="fa-solid fa-star-of-life star" ></i></label>
+                    <input type="file" class="form-control border p-3 col-12" name="recipe[image]" accept="image/*">
+                    <div class="invalid-feedback">
+                        Please upload image
+                    </div>
+                </div>
+                
+            </div>
+                
+            </div>
+
+            <div class="row mb-4">
+                <div class="col">
+                    <label class="form-label">Enter Ingredients &nbsp;<i class="fa-solid fa-star-of-life star" ></i></label>
+                    <textarea placeholder="Enter Ingredients" class="form-control border" id="steps" name="recipe[ingredients]"
+                        style="width: 100% !important;" required></textarea>
+                    <div class="valid-feedback">
+                        Looks Yammy..
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="row mb-4 mt-3">
+                <div class="col">
+                    <label for="steps" class="form-label">Enter Steps &nbsp;<i class="fa-solid fa-star-of-life star" ></i></label>
+                    <textarea placeholder="Enter Steps" class="form-control border" id="steps" name="recipe[steps]"
+                        style="width: 100% !important;" required></textarea>
+                    <div class="invalid-feedback">
+                        Enter steps
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="offset-5">
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+
+        </form>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+        <script src="\tinymce\tinymce.min.js"></script>
+        <script>
+            tinymce.init({
+                selector: '#steps',
+                plugins: 'image link code table lists fullscreen emoticons charmap preview',
+                toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | ' +
+                         'bullist numlist outdent indent | link image media | emoticons charmap | preview fullscreen | code | lineheight',
+                height: 400,
+                menubar: true,
+                image_title: true,
+                automatic_uploads: true,
+                file_picker_types: 'image',
+                file_picker_callback: function (callback, value, meta) {
+                    if (meta.filetype === 'image') {
+                        const input = document.createElement('input');
+                        input.setAttribute('type', 'file');
+                        input.setAttribute('accept', 'image/*');
+                        input.onchange = function () {
+                            const file = this.files[0];
+                            const reader = new FileReader();
+                            reader.onload = function () {
+                                callback(reader.result, { alt: file.name });
+                            };
+                            reader.readAsDataURL(file);
+                        };
+                        input.click();
+                    }
+                },
+                branding: false,
+                setup: function (editor) {
+                    // Adding line height options
+                    editor.ui.registry.addMenuButton('lineheight', {
+                        text: 'Line Height',
+                        fetch: function (callback) {
+                            callback([
+                                { type: 'menuitem', text: '1', onAction: function () { editor.execCommand('mceLineHeight', false, '1'); }},
+                                { type: 'menuitem', text: '1.5', onAction: function () { editor.execCommand('mceLineHeight', false, '1.5'); }},
+                                { type: 'menuitem', text: '2', onAction: function () { editor.execCommand('mceLineHeight', false, '2'); }},
+                                { type: 'menuitem', text: '2.5', onAction: function () { editor.execCommand('mceLineHeight', false, '2.5'); }},
+                                { type: 'menuitem', text: '3', onAction: function () { editor.execCommand('mceLineHeight', false, '3'); }}
+                            ]);
+                        }
+                    });
+                }
+            });
+        </script>
+        
+    </body>

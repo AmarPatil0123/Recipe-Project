@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        footer {
+            background-color: rgba(0, 0, 0, 0.681);
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            flex-wrap: wrap; /* Make it responsive */
+        }
+    
+        .footer-links a {
+            text-decoration: none;
+            color: white;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+    
+        .footer-links a:hover {
+            color: #ffce00; /* Change color on hover */
+        }
+    
+        .social-media img {
+            margin: 0 10px;
+            transition: transform 0.3s ease;
+        }
+    
+        .social-media img:hover {
+            transform: scale(1.1); /* Slightly enlarge on hover */
+        }
+    
+        .footer-text {
+            margin-top: 10px;
+        }
+    
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .footer-links {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="social-media">
+                <a href="#" target="_blank"><img src="https://img.icons8.com/material-outlined/24/ffffff/facebook-new.png" alt="Facebook" /></a>
+                <a href="#" target="_blank"><img src="https://img.icons8.com/material-outlined/24/ffffff/twitter-squared.png" alt="Twitter" /></a>
+                <a href="#" target="_blank"><img src="https://img.icons8.com/material-outlined/24/ffffff/instagram-new.png" alt="Instagram" /></a>
+            </div>
+        </div>
+        <p class="footer-text">© 2024 Recipe Blog. All rights reserved.</p>
+    </footer>
+    
+   
+    
+</body>
+</html>

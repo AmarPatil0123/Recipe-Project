@@ -1,0 +1,78 @@
+<% layout('/layouts/boilerplate1') -%>
+
+<style>
+
+.report-container {
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    border: 2px solid black;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: scroll;
+    height: 100%;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.report-card h3{
+    text-decoration: underline;
+}
+
+.report-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #fff;
+}
+
+.report-card h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.title{
+    color: blue;
+    text-decoration: underline;
+}
+</style>
+
+
+<div class="report-container">
+    <h2>Spam Reports</h2>
+    <%for(let report of reports){%>
+        <div class="report-card">
+            <h3>Reported By: <%= report.reported_user.fullname %> </h3><br>
+
+            <p><strong>Recipe Title:</strong> <a href="/recipes/show/<%= report.reported_recipe._id %>" class="title" title="View Recipe"><%= report.reported_recipe.title %> </a></p>
+
+            <p><strong>Recipe Owner:</strong> <%= report.reported_recipe.owner.fullname %></p>
+
+            <p><strong>Reason:</strong> <%= report.reason %></p>
+            <p><strong>Description:</strong> <%= report.description %></p>
+
+            <p><strong>Reported on:</strong> <%= new Date(report.created_at).toLocaleDateString("en-US", {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            }) %></p>
+
+
+            <div class="report-actions">
+                <a href="/admin/warn/<%= report.reported_recipe.owner._id %>" class="btn btn-warning">Warn</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <a href="/admin/remove/reportRecipe/<%= report._id %>" class="btn btn-secondary" title="Remove from here"
+                    onclick="return confirm('Do you want to continue')">Remove</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <a href="/admin/reportRecipe/<%= report._id %>/<%= report.reported_recipe._id %>/<%= report.reported_recipe.owner._id %>/<%= report.reported_user._id %> " class="btn btn-danger" 
+                    title="Delete Permanantly" onclick="return confirm('Do you want to continue')">Delete</a>
+                    
+            </div>
+        </div>
+    <%}%>       
+</div>

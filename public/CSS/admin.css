@@ -1,0 +1,12 @@
+/* //admin */
+
+.admin-container{
+    display: flex;
+    
+}
+
+/* users styling */
+
+.user-data{
+   height: 100%;
+}

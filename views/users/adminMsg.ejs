@@ -1,0 +1,32 @@
+<% layout('/layouts/boilerplate') -%>
+
+<style>
+    .message-container{
+        max-width: 900px;
+        height:fit-content;
+        border: 2px solid black;
+        border-radius: 5px;
+        padding: .5rem;
+        margin: 2rem;
+    }
+
+    .admin{
+        color: rgb(122, 14, 255);
+    }
+
+    .msg{
+        margin-left: 2rem;
+    }
+</style>
+
+<%if(user.adminMsg.length === 0){%>
+    <h4 class="text-center">Empty !</h4>
+<%}%>
+
+<% for(let i=0; i<user.adminMsg.length; i++){ %>
+    <div class="message-container">
+        <p class="admin"><b>Admin ~</b></p>
+        
+        <pre class="msg"> <%= user.adminMsg[i] %> </pre>
+    </div>
+<%}%>

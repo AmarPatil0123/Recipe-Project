@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+
+       
+
+        .scroll-container {
+            overflow-x: auto;
+            white-space: nowrap;
+            background-color: rgba(128, 128, 128, 0.067);
+            border-radius: 10px;
+        }
+
+        .scroll-item {
+            display: inline-block;
+            margin-right: 4rem;
+            /* Space between items */
+        }
+
+        .scroll-item img {
+            border-radius: 50%;
+            /* Fully rounded images */
+            width: 100px;
+            /* Set a fixed width */
+            height: 100px;
+            /* Set a fixed height */
+            object-fit: cover;
+            /* Ensure images cover the entire area */
+            margin-bottom: .5rem;
+        }
+
+        .scroll-container {
+            overflow-x: auto;
+            /* Enable horizontal scrolling */
+            overflow-y: hidden;
+            /* Hide vertical scrollbar */
+            white-space: nowrap;
+            padding: 25px 0px 10px 0px;
+            /* Adjust padding to only apply top and bottom */
+        }
+
+        /* Hide scrollbar for WebKit browsers */
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+            /* Hide scrollbar */
+        }
+
+        /* Hide scrollbar for Firefox */
+        .scroll-container {
+            scrollbar-width: none;
+            /* Hide scrollbar for Firefox */
+        }
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            /* or 400 for normal weight */
+        }
+
+        a{
+            text-decoration: none;
+            color: orangered;
+            font-weight: bold;
+            transition: all 0.1s;
+            
+        }
+
+        a:hover{
+            text-decoration: none;
+            color: red;
+        }
+
+
+        @media (max-width: 576px) {
+            .scroll-item img {
+                width: 70px;
+                /* Smaller images for mobile */
+                height: 70px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="categories mt-2">
+        <h1>Categories :</h1><br>
+        <div class="scroll-container">
+            <a href="/recipes/Nonveg" class="scroll-item">
+                <img src="/Images/chiken-transf.jpeg"
+                    alt="Image 1">
+                <p class="text-center mt-2">Nonveg</p>
+            </a>
+            <a href="/recipes/Mexican" class="scroll-item">
+                <img src="/Images/mexican-transf.jpeg"
+                    alt="Image 2">
+                <p class="text-center">Mexican</p>
+
+            </a>
+            <a href="/recipes/Low-Carb" class="scroll-item">
+                <img src="/Images/lowcarb-transf.png"
+                    alt="Image 3">
+                <p class="text-center">Low-Carb</p>
+
+            </a>
+            <a href="/recipes/Gluten-Free" class="scroll-item">
+                <img src="/Images/gluttenfree-transf.png"
+                    alt="Image 4">
+                <p class="text-center">Gluten-Free</p>
+
+            </a>
+            <a href="/recipes/Salads" class="scroll-item">
+                <img src="/Images/salad-transf.png"
+                    alt="Image 5">
+                <p class="text-center">Salads</p>
+
+            </a>
+            <a href="/recipes/Vegetarian" class="scroll-item">
+                <img src="/Images/vegetarian-transf.png"
+                    alt="Image 5">
+                <p class="text-center">Vegetarian</p>
+
+            </a>
+            <a href="/recipes/Desserts" class="scroll-item">
+                <img src="/Images/dessert-transf.png"
+                    alt="Image 5">
+                <p class="text-center">Desserts</p>
+
+            </a>
+            <a href="/recipes/Soup" class="scroll-item">
+                <img src="/Images/soup-transf.png"
+                    alt="Image 5">
+                <p class="text-center">Soup</p>
+
+            </a>
+            <a href="/recipes/Pasta" class="scroll-item">
+                <img src="/Images/pasta-transf.png"
+                    alt="Image 5">
+                <p class="text-center">Pasta</p>
+
+            </a>
+
+            <a href="/recipes/Snacks" class="scroll-item">
+                <img src="/Images/snacks-transf.png"
+                    alt="Image 5">
+                <p class="text-center">Snacks</p>
+
+            </a>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<% layout('/layouts/boilerplate') -%>
+
+  <%if(!category){%>
+    <h1>Recipes :</h1>
+    <%}%>
+      <h1 class="mb-4 text-center"><span style="color: red; font-weight: bold;">
+          <%= category %>
+        </span> Recipes :</h1>
+
+      <hr><br>
+      <div class="recipe-container">
+        <%if(recipes && recipes.length>=1){%>
+          <% for(recipe of recipes){ %>
+
+            <div class="card-container" style="position: relative;">
+              <div class="img-container">
+                <a href="/recipes/show/<%= recipe._id %>">
+                  <img src="<%= recipe.image.url %>" loading="lazy" alt="image" />
+                </a>
+                <i class="fa-solid fa-heart fav" data-id="<%= recipe._id %>"
+                  style="cursor: pointer; color: rgba(29, 27, 27, 0.2); position: absolute; right: 1rem; top: 1rem;" title="Add to favourate">
+                </i>
+              </div>
+              <div class="text-container" style="width: 90%;">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                  <p class="recipe-title">
+                    <%= recipe.title %>
+                  </p>
+                  <span style="font-size: .7rem;"><i class="fa-solid fa-eye"></i>
+                    <%= recipe.views %>
+                  </span>
+                </div>
+                <p class="recipe-desc"><span>Desc :</span>
+                  <%= recipe.description %>
+                </p>
+              </div>
+            </div>
+
+            <% } %>
+              <%}%>
+
+
+                <% if (!recipes || recipes.length===0) { %>
+                  <div class="text-center" style="margin: 0 auto;">
+                    <span style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Oops! No
+                      Recipes found with the given category</span>
+                  </div>
+                  <% } %>
+
+
+      </div>

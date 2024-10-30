@@ -1,0 +1,113 @@
+<% layout('/layouts/boilerplate') -%>
+
+<div class="profile-container">
+    <div class="profile-picture">
+        <p><img src="<%= userData.profile_image.url %>" alt="Profile Picture"></p>
+
+        <% if(user && user._id.equals(userData._id)){ %>
+            <a href="/editprofile/<%= user._id %>" class="p-2 btn btn-primary">Edit Profile</a>
+        <%}%>
+    </div>
+
+    <div class="user-info">
+        <div style="display: flex;"  class="username">
+            <div style="display: flex;" class="email">
+                <h1 class="user-name" style="font-family:Georgia, 'Times New Roman', Times, serif;"><%= userData.fullname %> </h1>
+                <%if(user && userData._id.equals(user._id)){%>
+                    <div class="pt-3 ml-5">
+                        <a style="font-size: 1rem;" href="">-- <%= userData.email %></a>
+                    </div>
+                <%}%>
+            </div>
+
+            <% if(user && !userData._id.equals(user._id) && !userData.followers.includes(user._id)) {%>
+                <span class="follow" id="follow" ownerId="<%= userData._id %>" >Follow</span>
+                <% } %>
+
+
+            <% if(user && !userData._id.equals(user._id) && userData.followers.includes(user._id)){ %>
+                <span class="follow" id="follow" ownerId="<%= userData._id %>">Unfollow</span>
+            <%}%>
+        </div> 
+
+        <p class="user-bio"><%= userData.bio %></p>
+        
+        <div class="user-stats">
+            <div class="stat-item">
+                <span class="stat-number"><%= userData.totalRecipes %></span>
+                <span class="stat-label">Recipes</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number"><%= userData.following.length %></span>
+                <span class="stat-label">Following</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number"><%= userData.followers.length %></span>
+                <span class="stat-label">Followers</span>
+            </div>
+        </div>
+
+        <!-- Social Media Icons -->
+        <div class="social-icons">
+            <a href="<%= userData.facebook %>"><i class="fa-brands fa-facebook"></i></a>
+            <a href="<%= userData.instagram %>" class="insta"><i class="fa fa-instagram"></i></a>
+            <a href="<%= userData.twitter %>"><i class="fa fa-twitter"></i></a>
+        </div>
+
+        <% if(user && user._id.equals(userData._id)){ %>
+            <div class="delete-acc">
+                <a href="/deleteAcc/<%= user._id %>" onclick="return confirm('You will loose all your data')">Delete Account</a>
+            </div>
+        <%}%>
+        
+    </div>
+
+</div>  
+
+<!-- //recipes  section -->
+
+<div  style="width: 80%; margin: 0 auto;">
+
+
+
+    <% if(!user._id.equals(userData._id)){ %>
+        <h1 style="margin: 3rem 0rem; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Recipes by <%= userData.fullname %> :</h1>
+    <% } else { %>
+        <h1 style="margin: 3rem 0rem; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"> Your Recipes : </h1>
+    <% } %>
+</h1>
+    
+
+<div class="recipe-container" style="justify-content: flex-start;">
+    <%if(recipes && recipes.length>=1){%>
+        <% for(recipe of recipes){ %>
+            <a href="/recipes/show/<%= recipe._id %>">
+              <div class="card-container">
+                <div class="img-container">
+                  <img src="<%= recipe.image.url %>" loading="lazy" alt="image" />
+                </div>
+            </a>
+            <div class="text-container" style="width: 90%;">
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <p class="recipe-title"> <%= recipe.title %> </p>
+                <span style="font-size: .7rem;"><i class="fa-solid fa-eye"></i> <%= recipe.views %></span>
+                <i class="fa-solid fa-heart fav" data-id="<%= recipe._id %>" style="cursor: pointer; color: rgba(29, 27, 27, 0.2);"></i>
+              </div>
+              <p class="recipe-desc"><span>Desc :</span>
+                <%= recipe.description %>
+              </p>
+            </div>
+        </div>
+  
+        <% } %>
+    <%}%>
+
+
+    <% if (!recipes || recipes.length === 0) { %>
+        <div class="text-center" >
+                Oops! No Recipe Found
+        </div>
+    <% } %>
+    
+</div> 
+</div>

@@ -1,0 +1,153 @@
+<% layout('/layouts/boilerplate') -%>
+
+<style>
+    @media (max-width :1024px) {
+        .form-container{
+            width: 100% !important;
+        }
+    }
+
+    @media (max-width :484px) {
+        .form-container{
+            width: 100% !important;
+        }
+
+    }
+</style>
+
+    <body>
+        <form method="post" action="/recipes/<%= recipe._id %>/editData?_method=PUT" class="needs-validation" style="margin: 0 auto; box-shadow: 0 0 10px 5px rgba(51, 51, 51, 0.073); width: 80%; padding: 2rem !important;"
+            novalidate enctype="multipart/form-data">
+            <h1 class="text-center mb-5">Edit Recipe</h1>
+
+            <div class="row mb-3">
+                <div class="col-6 col-sm-6">
+                    <label for="title" class="form-label">Enter Title &nbsp;<i class="fa-solid fa-star-of-life star" ></i></label>
+                    <input type="text" id="title" class="form-control p-3 " name="recipe[title]"  minlength="2" maxlength="20"
+                        value="<%=recipe.title%>" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-6">
+                    <label for="category" class="form-label">Category &nbsp;<i class="fa-solid fa-star-of-life star" ></i></label>
+                    <select id="category" name="recipe[category]" class="p-3" style="width: 100%; height: auto;" required>
+                        <option selected disabled>Choose Category</option>
+                        <option value="Nonveg" <%=recipe.category==='Nonveg' ? 'selected' : '' %>>Nonveg</option>
+                        <option value="Mexican" <%=recipe.category==='Mexican' ? 'selected' : '' %>>Mexican</option>
+                        <option value="Low-Carb" <%=recipe.category==='Low-Carb' ? 'selected' : '' %>>Low-Carb</option>
+                        <option value="Gluten-Free" <%=recipe.category==='Gluten-Free' ? 'selected' : '' %>>Gluten-Free</option>
+                        <option value="Salads" <%=recipe.category==='Salads' ? 'selected' : '' %>>Salads</option>
+                        <option value="Vegetarian" <%=recipe.category==='Vegetarian' ? 'selected' : '' %>>Vegetarian</option>
+                        <option value="Desserts" <%=recipe.category==='Desserts' ? 'selected' : '' %>>Desserts</option>
+                        <option value="Soup" <%=recipe.category==='Soup' ? 'selected' : '' %>>Soup</option>
+                        <option value="Pasta" <%=recipe.category==='Pasta' ? 'selected' : '' %>>Pasta</option>
+                        <option value="Snacks" <%=recipe.category==='Snacks' ? 'selected' : '' %>>Snacks</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="mb-3 col-6 col-sm-6 desc">
+                    <label for="description" class="form-label ">Write Overview &nbsp;<i class="fa-solid fa-star-of-life star" ></i></label>
+                    <textarea class="form-control p-3" id="description" maxlength="150" name="recipe[description]"
+                        required><%=recipe.description%></textarea>
+                    <div class="invalid-feedback">
+                        Add Description
+                    </div>
+                </div>
+            </div>
+           
+            <div class="row">
+                <div class="col-6 col-sm-6">
+                    <div class="mb-3">
+                        <label class="form-label">Upload New Image :</label>
+                        <input type="file" id="title" accept="image/*" class="form-control p-3" name="recipe[image]">
+                    </div>
+                </div>
+
+                <div class="col-3 ">
+                    <div class="mb-3 border-0">
+                        <img src="<%= recipe.image.url %>" alt="image" style="width:150px; height:150px">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-12">
+                    <label class="form-label">Enter Ingredients &nbsp;<i class="fa-solid fa-star-of-life star" ></i></label>
+                    <textarea class="form-control" id="steps" name="recipe[ingredients]" style="width: 100% !important;"
+                        required><%=recipe.ingredients%></textarea>
+                    <div class="invalid-feedback">
+                        Add Ingredients
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class=" row mb-3">
+                <div class="col-12 ">
+                    <label for="steps" class="form-label">Enter Steps &nbsp;<i class="fa-solid fa-star-of-life star" ></i></label>
+                    <textarea class="form-control" id="steps" name="recipe[steps]" style="width: 100% !important;"
+                        required> <%=recipe.steps%> </textarea>
+                    <div class="invalid-feedback">
+                        Add Steps
+                    </div>
+                </div>
+            </div>
+           
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+
+        </form><br><br>
+        <script src="\tinymce\tinymce.min.js"></script>
+        <script>
+            tinymce.init({
+                selector: '#steps',
+                plugins: 'image link code table lists fullscreen emoticons charmap preview',
+                toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | ' +
+                         'bullist numlist outdent indent | link image media | emoticons charmap | preview fullscreen | code | lineheight',
+                height: 400,
+                menubar: true,
+                image_title: true,
+                automatic_uploads: true,
+                file_picker_types: 'image',
+                file_picker_callback: function (callback, value, meta) {
+                    if (meta.filetype === 'image') {
+                        const input = document.createElement('input');
+                        input.setAttribute('type', 'file');
+                        input.setAttribute('accept', 'image/*');
+                        input.onchange = function () {
+                            const file = this.files[0];
+                            const reader = new FileReader();
+                            reader.onload = function () {
+                                callback(reader.result, { alt: file.name });
+                            };
+                            reader.readAsDataURL(file);
+                        };
+                        input.click();
+                    }
+                },
+                branding: false,
+                setup: function (editor) {
+                    // Adding line height options
+                    editor.ui.registry.addMenuButton('lineheight', {
+                        text: 'Line Height',
+                        fetch: function (callback) {
+                            callback([
+                                { type: 'menuitem', text: '1', onAction: function () { editor.execCommand('mceLineHeight', false, '1'); }},
+                                { type: 'menuitem', text: '1.5', onAction: function () { editor.execCommand('mceLineHeight', false, '1.5'); }},
+                                { type: 'menuitem', text: '2', onAction: function () { editor.execCommand('mceLineHeight', false, '2'); }},
+                                { type: 'menuitem', text: '2.5', onAction: function () { editor.execCommand('mceLineHeight', false, '2.5'); }},
+                                { type: 'menuitem', text: '3', onAction: function () { editor.execCommand('mceLineHeight', false, '3'); }}
+                            ]);
+                        }
+                    });
+                }
+            });
+        </script>
+        
+
+    </body>

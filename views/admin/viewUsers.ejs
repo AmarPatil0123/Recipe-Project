@@ -1,0 +1,36 @@
+<% layout('/layouts/boilerplate1') -%>
+
+<div class="user-data" style="height: 100%;overflow: scroll;">
+    <% if(users.length > 0) { %>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Total Recipes</th>
+                    <th scope="col">Total Reviews</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach((user, index) => { %>
+                <tr>
+                    <th scope="row"><%= index + 1 %></th>
+                    <td>
+                        <img src="<%= user.profile_image.url %>" alt="Profile Image" class="rounded-circle" width="50" height="50" />&nbsp;&nbsp;
+                        <span style="font-weight: 800; font-size: 1rem;"><%= user.fullname %></span>
+                    </td>
+                    <td><%= user.email %></td>
+                    <td><%= user.totalRecipes %></td>
+                    <td><%= user.totalReviews %></td>
+                    <td class="action-buttons">
+                        <a href="/admin/warn/<%= user._id %>" class="btn btn-warning">Warn</a> &nbsp;&nbsp;
+                        <a href="/admin/delete/user/<%= user._id %>" class="btn btn-danger" onclick="return confirm('Do you want to continue')">Delete</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } %>
+</div>

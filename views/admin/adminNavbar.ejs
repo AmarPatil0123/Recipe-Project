@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px !important;
+            background-color: rgba(255,255,255,255);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky !important;
+            top: 0px !important;
+            z-index: 999;
+        }
+
+        .logo a {
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: bold;
+            color:  #FF5E3A;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem; /* 1rem spacing between all links */
+            padding-top: .5rem;
+            box-sizing: border-box;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 18px;
+            color: red;
+            font-weight: bolder;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #FF5E3A;
+        }
+
+        .search-bar input {
+            padding: 9px 35px;
+            border-radius: 10px;
+            border: 1px solid black;
+            outline: none;
+            font-size: 16px;
+        }
+
+   
+
+        .auth-buttons a {
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: background 0.3s ease;
+        }
+
+        .login-btn {
+          color: #FF5E3A;
+            font-weight: bold;
+            margin-left: 1rem; /* /* 1rem spacing before Login button */
+        }
+
+        .signup-btn {
+            color: #FF5E3A;
+            font-weight: bold;
+            margin-left: 1rem; /* 1rem spacing before Sign Up button */
+        }
+
+        .login-btn:hover {
+            color: #FF5E3A;
+        }
+
+        .signup-btn:hover {
+            color: white;
+        }
+
+        .hamburger {
+            display: none; /* Hidden by default */
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 4px 0;
+            transition: 0.4s;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1000px) {
+            .nav-links {
+                display: none; /* Hidden by default */
+                flex-direction: column; /* Stack links vertically */
+                position: absolute;
+                top: 56px; /* Position below the navbar */
+                right: 0;
+                background: rgb(128, 128, 128);
+                width: 100%;
+                padding: 15px 0;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            }
+
+            .nav-links.active {
+                display: flex; /* Show links when active */
+            }
+
+            .hamburger {
+                display: block; /* Show hamburger icon */
+            }
+
+            .navbar {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/recipes">Recipe Blog</a>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="/adminPage">Home</a></li>
+            
+            <a href="/admin/recipes" class="login-btn">View Recipes</a>
+
+            
+            <a href="/admin/reports" class="login-btn" style="color: red; cursor: pointer;">Reports</a>
+            
+            <li>
+                <% if(user){%>
+                    <a href="/admin/logout" class="login-btn">Logout</a>
+                <%}%>
+
+                <% if(!user){%>
+                    <a href="/login" class="login-btn">Login</a>
+                <%}%>
+            </li>
+        </ul>
+    </nav>
+
+    <script>
+        // Toggle navbar visibility on hamburger click
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

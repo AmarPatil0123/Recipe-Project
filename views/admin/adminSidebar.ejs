@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        a{
+            color: white;
+        }
+
+        .side-bar{
+            width: 20%;
+            background-color: black;
+            min-height: 100vh;
+            text-align: center;
+            color: white;
+            padding-top: 1rem;
+        }
+
+        .admin-image{
+            width: 8rem;
+            height: 8rem;
+            border: 2px solid white;
+            border-radius: 50%;
+            object-fit: cover;
+            outline: 3px solid rgb(17, 246, 242);        }
+
+       
+
+        .admin-links{
+            margin-top: 5rem;
+            text-align: start;
+            padding-left: 2rem;
+
+        }
+
+        li {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <section class="side-bar">
+        <div class="admin-top">
+            <h3>Admin</h3>
+            <img src="https://t4.ftcdn.net/jpg/04/75/00/99/360_F_475009987_zwsk4c77x3cTpcI3W1C1LU4pOSyPKaqi.jpg" class="admin-image" alt="admin-image">
+        </div>
+  
+        <ul class="admin-links">
+            <li><a href="/admin/dashboard"> Dashboard </a> </li>
+            <li><a href="/admin/users"> Manage Users </a> </li>
+            <li> <a href="/admin/recipes"> Manage Recipes </a> </li>
+            <li> <a href="/admin/reports"> View Reports </a> </li>
+
+            <% if(user){ %>
+                <li><a href="/admin/logout">Logout</a></li>
+            <% }else{ %>
+                <li><a href="/login">Login</a></li>
+           <% }%>
+        </ul>
+    </section>
+</body>
+</html>

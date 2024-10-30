@@ -1,0 +1,36 @@
+<% layout('/layouts/boilerplate') -%>
+
+<style>
+.warning-box {
+    width: 500px;
+    height: 100px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #fff3cd;
+    border-left: 4px solid #ffc107;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    color: #856404;
+}
+
+.admin-name {
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+    color: #856404;
+}
+
+.warning-text {
+    font-size: 0.9rem;
+    margin: 0;
+    text-align: justify;
+}
+
+
+</style>
+
+<div class="warning-box">
+    <p class="admin-name">Admin: <strong>Admin Name</strong></p>
+    <p class="warning-text"><%= msg %></p>
+</div>
+

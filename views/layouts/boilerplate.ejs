@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/CSS/style.css"/>
+    <link rel="stylesheet" href="/CSS/rating.css"/>
+    <link rel="stylesheet" href="/CSS/review.css"/>
+    <link rel="stylesheet" href="/CSS/signLogin.css"/>
+    <link rel="stylesheet" href="/CSS/userProfile.css"/>
+    <link rel="stylesheet" href="/CSS/report.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="/Images/favicon.jpg" type="image/jpg">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Pacifico&display=swap');
+    </style>
+</head>
+<body style="background-color: rgba(255,255,255,255);">
+    <%- include("../includes/navbar.ejs") %>
+    
+
+    <section class="main-container" >
+        <%- include("../includes/flash.ejs") %>
+        <%- body -%>
+    </section>
+
+    <%- include("../includes/footer.ejs") %>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="/JS/script.js"></script>
+    <script src="/JS/cart.js"></script>
+    <script src="/JS/AjaxReq.js"></script>
+    <script src="https://kit.fontawesome.com/03c37699e3.js" crossorigin="anonymous"></script>
+</body>
+</html>
+

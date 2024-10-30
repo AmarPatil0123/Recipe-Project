@@ -1,0 +1,39 @@
+<% layout('/layouts/boilerplate1') -%>
+
+<h1 class="text-center" style="text-decoration: underline;">Recipes by all the Users</h1>
+<div style="display: flex; flex-wrap: wrap; height: 100%; overflow: scroll;" >
+
+  <%if(recipes && recipes.length>=1){%>
+      <% for(recipe of recipes){ %>
+          <a href="/recipes/show/<%= recipe._id %>">
+            <div class="card-container">
+              <div class="img-container">
+                <img src="<%= recipe.image.url %>" loading="lazy" alt="image" />
+              </div>
+          </a>
+          <div class="text-container" style="width: 90%;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <img src="<%= recipe.owner.profile_image.url %>" alt="img" style="width: 2rem; height: 2rem; border-radius: 50%;">
+              <p class="recipe-title"> <%= recipe.title %> </p>
+
+              <div class="dropdown">
+                
+                  <i class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer !important;"></i>
+                
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/admin/warn/<%= recipe.owner._id %>">Warn</a></li>
+                  <li><a class="dropdown-item" href="/admin/delete/recipe/<%= recipe._id %>/<%= recipe.owner._id %>" onclick="return confirm('Do you want to continue')">Delete</a></li>
+                </ul>
+              </div>
+              
+            </div>
+            <p class="recipe-desc"><span>Desc :</span>
+              <%= recipe.description %>
+            </p>
+          </div>
+      </div>
+
+      <% } %>
+    
+  <%}%>
+</div>
