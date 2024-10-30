@@ -7,12 +7,12 @@
     if(followBtn.innerHTML === "Follow"){
       followBtn.innerHTML = "Unfollow";
   
-      fetch(`http://localhost:8080/follow/${ownerId}`)
+      fetch(`https://yammyrecipes.onrender.com/follow/${ownerId}`)
       .then((response)=> response.json()).then((data)=>console.log(data)).catch((err)=>console.log(err))
       
     }else{
       followBtn.innerHTML = "Follow";
-      fetch(`http://localhost:8080/unfollow/${ownerId}`)
+      fetch(`https://yammyrecipes.onrender.com/unfollow/${ownerId}`)
       .then((response)=> response.json()).then((data)=>console.log(data)).catch((err)=>console.log(err))
       
     }
@@ -38,7 +38,7 @@ like.addEventListener("click", () => {
   like.style.pointerEvents = "none";
   dislike.style.pointerEvents = "none";
 
-  fetch(`http://localhost:8080/like/${likedRecipe}/${recipeLikedUser}`)
+  fetch(`https://yammyrecipes.onrender.com/like/${likedRecipe}/${recipeLikedUser}`)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
@@ -65,7 +65,7 @@ dislike.addEventListener("click", () => {
   like.style.pointerEvents = "none";
   dislike.style.pointerEvents = "none";
 
-  fetch(`http://localhost:8080/dislike/${dislikedRecipe}/${recipeDislikedUser}`)
+  fetch(`https://yammyrecipes.onrender.com/dislike/${dislikedRecipe}/${recipeDislikedUser}`)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);

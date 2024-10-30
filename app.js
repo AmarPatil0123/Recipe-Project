@@ -1,7 +1,3 @@
-if(process.env.NODE_ENV !="production"){
-    require('dotenv').config();
-}
-
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -103,6 +99,9 @@ app.use("/admin", AdminRouter);
 
 
 app.all("*", (req, res, next) => {
+    if(req.path === "/"){
+        return res.redirect("/recipes")
+    }
     next(new ExpressError(404, "Page not found"));
 });
 

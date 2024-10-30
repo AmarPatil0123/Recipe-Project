@@ -37,7 +37,7 @@ favRecipes.forEach((favRecipeIcon) => {
 
 const sendFavorites = async () => {
   try {
-    const response = await fetch("http://localhost:8080/favourateRecipes", {
+    const response = await fetch("https://yammyrecipes.onrender.com/favourateRecipes", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',

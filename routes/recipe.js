@@ -18,7 +18,6 @@ const {validateRecipe} =require("../middleware.js");
 // root route, showing trending and reconmendded recipes
 
 router.get("/", async (req, res,next) => {
-
     let recipes =await Recipe.aggregate([
         {$sort : {views : -1, likes :-1}},
         {$limit : 12}
