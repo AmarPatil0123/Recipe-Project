@@ -1,5 +1,17 @@
 <% layout('/layouts/boilerplate') -%>
+<style>
+    /* share button css */
 
+    .share{
+      color: white;
+      background-color: grey;
+      font-size: 1.5rem;
+      padding: .8rem 1rem;
+      border-radius: 40%;
+      cursor: pointer;
+    }
+
+</style>
 <body>
     <div class="container pt-3" style="position: relative; box-shadow: 0 0 10px 5px rgba(51, 51, 51, 0.025);">
         <br><br>
@@ -106,6 +118,10 @@
                         <span class="dislikeCount"><%= recipe.dislikes %></span>
 
                     <% } %>
+
+                    <!-- share button -->
+                    <span onclick="shareContent()" class="share" title="share"><i class="fa-solid fa-share-nodes"></i></span>
+
                     <button class="report-btn btn btn-secondary ml-4">Report</button>
                 <% } %>
             </div>
@@ -181,6 +197,20 @@
                     .then((data) => console.log(data))
                     .catch((error) => console.error('Error incrementing page count:', error));
             }
+
+            function shareContent() {
+            if (navigator.share) {
+                navigator.share({
+                    title: '<%= recipe.title %>',
+                    text: "Check out this amazing recipe!",
+                    url: window.location.href,
+                }).then(() => {
+                    console.log("Thanks for sharing!");
+                }).catch(console.error);
+                } else {
+                    alert("Sharing is not supported on this browser. Please copy the link manually.");
+                }
+        }
         </script>
     </div>
 </body>
