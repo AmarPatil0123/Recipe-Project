@@ -93,16 +93,16 @@ router.get("/remove/reportRecipe/:id",wrapAsync(async(req,res)=>{
 }));
 
 
-//deleting recipe from recipe and report schema  by admin
+//deleting recipe from reports and recipe schema by admin [--from reports page--]
 
-router.get("/reportRecipe/:reportRecipeId/:recipeId/:userId/:reportedUserId",isUserLoggedIn,wrapAsync(async(req,res)=>{
-    let {reportRecipeId, recipeId , userId, reportedUserId} = req.params;
+router.get("/reportRecipe/:reportedRecipeId/:recipeId/:userId/:reportedUserId",isUserLoggedIn,wrapAsync(async(req,res)=>{
+    let {reportedRecipeId, recipeId , userId, reportedUserId} = req.params;
     
     let recipe = await Recipe.findById(recipeId);
     let recipeOwner = await User.findById(userId);
     let reportedUser = await User.findById(reportedUserId);
 
-    let reportedRecipe = await Report.findOneAndDelete(reportRecipeId);
+    let reportedRecipe = await Report.findOneAndDelete(reportedRecipeId);
     let deletedRecipe = await Recipe.findByIdAndDelete(recipeId);
 
     if (!deletedRecipe) {
@@ -140,8 +140,8 @@ router.get("/reportRecipe/:reportRecipeId/:recipeId/:userId/:reportedUserId",isU
                             Thank you for your understanding.
 
                             Best regards,
-                            The Recipe Team
-`
+                            The Recipe Team`
+
     reportedUser.adminMsg.push(msgToReporter);
     recipeOwner.adminMsg.push(msgToRecipeOwner);
     await reportedUser.save();
@@ -157,29 +157,45 @@ router.get("/reportRecipe/:reportRecipeId/:recipeId/:userId/:reportedUserId",isU
 }));
 
 
-// deleting from reports
+// deleting from recipes
 
-router.get("/delete/reportRecipe/:reportId/:recipeId/:userId",isUserLoggedIn,wrapAsync(async(req,res)=>{
-    let {reportId,recipeId , userId} = req.params;
-    
-    let reportedRecipe = await Report.findByIdAndDelete(reportId);
+router.get("/delete/recipe/:recipeId/:recipeOwnerId", isUserLoggedIn, wrapAsync(async (req, res) => {
+    const { recipeId, recipeOwnerId } = req.params;
 
-    let recipe = await Recipe.findByIdAndDelete(recipeId);
-
-    if (!reportedRecipe) {
+    const recipe = await Recipe.findById(recipeId);
+    if (!recipe) {
         req.flash("error_msg", "Recipe not found");
         return res.redirect("/admin/recipes");
     }
 
-    let owner = await User.findById(userId);
-    if(owner){
-        owner.totalRecipes -=1;
-        await owner.save();
+    const owner = await User.findById(recipeOwnerId);
+    if (!owner) {
+        req.flash("error_msg", "Recipe owner not found");
+        return res.redirect("/admin/dashboard");
     }
 
+    await Recipe.findByIdAndDelete(recipeId);
+
+    const msgToRecipeOwner = `Dear ${owner.fullname},
+
+    We wanted to inform you that your recipe titled '${recipe.title}' has been deleted from our platform.
+    This action was taken because the recipe was reported for review, and it did not meet our community standards. 
+
+    If you believe this was a mistake or have any questions regarding this decision,
+    please feel free to reach out to our support team.
+
+    Thank you for your understanding.
+
+    Best regards,
+    The Recipe Team`;
+
+    owner.totalRecipes -= 1;
+    owner.adminMsg.push(msgToRecipeOwner);
+    await owner.save();
+
     req.flash("success_msg", "Recipe Deleted");
-    res.redirect("/admin/reports");
-}))
+    res.redirect("/admin/recipes");
+}));
 
 
 //warning user
