@@ -162,6 +162,12 @@ router.get("/reportRecipe/:reportedRecipeId/:recipeId/:userId/:reportedUserId",i
 router.get("/delete/recipe/:recipeId/:recipeOwnerId", isUserLoggedIn, wrapAsync(async (req, res) => {
     const { recipeId, recipeOwnerId } = req.params;
 
+    const reportRecipe = await Report.find({ "reported_recipe": recipeId });
+    
+    if (reportRecipe.length > 0) {
+        await Report.deleteMany({ "reported_recipe": recipeId });
+    }
+
     const recipe = await Recipe.findById(recipeId);
     if (!recipe) {
         req.flash("error_msg", "Recipe not found");

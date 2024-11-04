@@ -20,7 +20,7 @@ const {validateRecipe} =require("../middleware.js");
 router.get("/", async (req, res,next) => {
     let recipes =await Recipe.aggregate([
         {$sort : {views : -1, likes :-1}},
-        {$limit : 12}
+        {$limit : 15}
     ])
 
     if(req.user) {
@@ -52,7 +52,7 @@ router.get("/", async (req, res,next) => {
                 b.views - a.views || 
                 b.likes - a.likes
             );
-        }).slice(0, 12); 
+        }).slice(0, 15); 
     
         return res.render("./recipes/home.ejs", { recipes, recommendedRecipes });
     }
