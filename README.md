@@ -45,7 +45,7 @@ Start the Development Server:
 bash
 Copy code
 npm start
-The app should now be running on http://localhost:3000.
+The app should now be running on http://localhost:8080.
 
 Usage
 Once the app is running:
