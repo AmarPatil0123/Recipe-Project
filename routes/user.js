@@ -200,7 +200,7 @@ async function main(email, userId, token, transporter) {
         subject: "Reset Password ✔", 
         text: `You are receiving this because you requested a password reset.\n\n
                Please click on the following link to reset your password:\n
-               http://localhost:8080/reset-password/${userId}/${token}\n\n
+               https://yammyrecipes.onrender.com/reset-password/${userId}/${token}\n\n
                If you did not request this, please ignore this email.\n`
     });
 
